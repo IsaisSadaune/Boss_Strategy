@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d7fb833a37a5464484faea98b7c8653, type: 3}
   m_Name: Bombs
   m_EditorClassIdentifier: 
-  cooldownAfterPattern: 0.5
+  cooldownAfterPattern: 0.1
   bombs: {fileID: 379626852669051753, guid: 77db6e3ac9bc3df44900abcc6a510ffe, type: 3}
-  attackPattern: {fileID: 11400000, guid: 800b75fc31ffcc247b440781dc08eab1, type: 2}
+  nextPatterns:
+  - {fileID: 11400000, guid: 800b75fc31ffcc247b440781dc08eab1, type: 2}
+  - {fileID: 11400000, guid: 45e27170ef8571c42b8add55b246bc23, type: 2}

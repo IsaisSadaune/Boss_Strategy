@@ -6,7 +6,7 @@ public abstract class StrategyData : ScriptableObject, IPatterns
     public float cooldownAfterPattern;
 
     public abstract void ApplyStrategy(Rigidbody r);
-    public abstract bool IsStrategyAppliable(List<StrategyData> lastPattern);
+    public abstract bool IsStrategyAppliable(List<StrategyData> lastPattern, Rigidbody rb);
     public virtual List<StrategyData> NextPatterns() => null;
 
 

@@ -9,5 +9,5 @@ public class Gun : StrategyData
         Debug.Log("GUN");
         r.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
     }
-    public override bool IsStrategyAppliable(List<StrategyData> lastPattern) => lastPattern[^1] is not Gun;
+    public override bool IsStrategyAppliable(List<StrategyData> lastPattern, Rigidbody rb) => lastPattern[^1] is not Gun;
 }

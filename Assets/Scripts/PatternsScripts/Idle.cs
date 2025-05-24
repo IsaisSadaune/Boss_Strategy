@@ -27,7 +27,7 @@ public class Idle : StrategyData
                         case 0:
                             if (down)
                             {
-                                r.MovePosition(Vector3.back);
+                                r.MovePosition(r.position + Vector3.back);
                                 canMove = true;
                             }
                             break;
@@ -35,7 +35,7 @@ public class Idle : StrategyData
                         case 1:
                             if (up)
                             {
-                                r.MovePosition(Vector3.forward);
+                                r.MovePosition(r.position + Vector3.forward);
                                 canMove = true;
                             }
                             break;
@@ -43,7 +43,7 @@ public class Idle : StrategyData
                         case 2:
                             if (left)
                             {
-                                r.MovePosition(Vector3.left);
+                                r.MovePosition(r.position + Vector3.left);
                                 canMove = true;
                             }
                             break;
@@ -51,7 +51,7 @@ public class Idle : StrategyData
                         case 3:
                             if (right)
                             {
-                                r.MovePosition(Vector3.right);
+                                r.MovePosition(r.position + Vector3.right);
                                 canMove = true;
                             }
 
@@ -67,12 +67,12 @@ public class Idle : StrategyData
             Debug.Log("Idle");
         }
     }
-    public override bool IsStrategyAppliable(List<StrategyData> d) => true;
+    public override bool IsStrategyAppliable(List<StrategyData> d, Rigidbody rb) => true;
 
-    private bool CanGoLeft(Transform t) => t.position.x > -4;
-    private bool CanGoRight(Transform t) => t.position.x < 4;
-    private bool CanGoUp(Transform t) => t.position.z < 4;
-    private bool CanGoDown(Transform t) => t.position.z > -4;
+    protected bool CanGoLeft(Transform t) => t.position.x > -4;
+    protected bool CanGoRight(Transform t) => t.position.x < 4;
+    protected bool CanGoUp(Transform t) => t.position.z < 4;
+    protected bool CanGoDown(Transform t) => t.position.z > -4;
 }
 
 

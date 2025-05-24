@@ -32,23 +32,24 @@ public class PatternsManager : MonoBehaviour
     }
 
 
-    private IEnumerator Cooldown_NextPattern()
-    {
-        IPatterns.ResetPatternsComponents(boss.transform);
-        Strategy();
-        yield return new WaitForSeconds(TimeBetweenTwoPatterns());
-    }
-
 
     //Choisit une strategie et l'applique depuis le pool
     [ContextMenu("Strategy")]
     public void Strategy()
     {
         StrategyData pattern;
-        if (NextPatterns.Count != 0 && NextPatterns[0].IsStrategyAppliable(lastPatterns))
+        if (NextPatterns.Count != 0)
         {
-            pattern = NextPatterns[0];
-            NextPatterns.Remove(pattern);
+            if (NextPatterns[0].IsStrategyAppliable(lastPatterns, rb))
+            {
+                pattern = NextPatterns[0];
+                NextPatterns.Remove(pattern);
+            }
+            else
+            {
+                pattern = idlePattern;
+                NextPatterns.Clear();
+            }
         }
         else
         {
@@ -56,21 +57,22 @@ public class PatternsManager : MonoBehaviour
             NextPatterns.Clear();
         }
 
-        if (!pattern.IsStrategyAppliable(lastPatterns))
+        if (!pattern.IsStrategyAppliable(lastPatterns, rb))
         {
             //Si pas possible de se déplacer, tp au spawn (normalement ça n'arrive jamais)
-            pattern = idlePattern.IsStrategyAppliable(lastPatterns) ? idlePattern : teleportPattern;
+            pattern = idlePattern.IsStrategyAppliable(lastPatterns, rb) ? idlePattern : teleportPattern;
         }
         actualPattern = pattern;
-        StartCoroutine(Cooldown_NextPattern());
 
         pattern.ApplyStrategy(rb);
         if (NextPatterns.Count == 0 && pattern.NextPatterns() != null) NextPatterns.AddRange(pattern.NextPatterns());
         AddPatternToHistory(pattern);
+
+        StartCoroutine(Cooldown_NextPattern());
     }
 
     //si le pattern suivant et précédent sont des idle, alors le cube va plus vite
-    private float TimeBetweenTwoPatterns() => 0.2f;
+    private float TimeBetweenTwoPatterns() => actualPattern != null ? actualPattern.cooldownAfterPattern : 0.5f;
 
     private void AddPatternToHistory(StrategyData pattern)
     {
@@ -90,4 +92,11 @@ public class PatternsManager : MonoBehaviour
             lastPatterns.Add(teleportPattern);
         }
     }
+    private IEnumerator Cooldown_NextPattern()
+    {
+        yield return new WaitForSeconds(TimeBetweenTwoPatterns());
+        IPatterns.ResetPatternsComponents(boss.transform);
+        Strategy();
+    }
+
 }

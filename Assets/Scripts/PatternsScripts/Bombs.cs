@@ -7,7 +7,7 @@ public class Bombs : StrategyData
 {
     public GameObject bombs;
 
-    public StrategyData attackPattern;
+    public List<StrategyData> nextPatterns;
     public override void ApplyStrategy(Rigidbody r)
     {
         Instantiate(bombs, r.position + Vector3.forward, Quaternion.identity);
@@ -16,7 +16,8 @@ public class Bombs : StrategyData
         Instantiate(bombs, r.position + Vector3.right, Quaternion.identity);
     }
 
-    public override bool IsStrategyAppliable(List<StrategyData> lastPattern) => !lastPattern.Find( x => x is Bombs);
+    //public override bool IsStrategyAppliable(List<StrategyData> lastPattern, Rigidbody rb) => !lastPattern.Find( x => x is Bombs);
+    public override bool IsStrategyAppliable(List<StrategyData> lastPattern, Rigidbody rb) => true;
 
-    public override List<StrategyData> NextPatterns() => new() { attackPattern, attackPattern, attackPattern };
+    public override List<StrategyData> NextPatterns() => nextPatterns;
 }
