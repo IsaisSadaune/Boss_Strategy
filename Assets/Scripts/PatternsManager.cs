@@ -34,9 +34,9 @@ public class PatternsManager : MonoBehaviour
 
     private IEnumerator Cooldown_NextPattern()
     {
+        yield return new WaitForSeconds(TimeBetweenTwoPatterns());
         IPatterns.ResetPatternsComponents(boss.transform);
         Strategy();
-        yield return new WaitForSeconds(TimeBetweenTwoPatterns());
     }
 
 

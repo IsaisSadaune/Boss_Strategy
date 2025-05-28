@@ -794,8 +794,9 @@ MonoBehaviour:
   boss: {fileID: 1265625995}
   patternsList:
   - {fileID: 11400000, guid: 00b5dfb89926c4e419f9ca87d51fb989, type: 2}
-  - {fileID: 11400000, guid: d01b32f5fd7059345b6bd0c782294d44, type: 2}
   - {fileID: 11400000, guid: 45e27170ef8571c42b8add55b246bc23, type: 2}
+  - {fileID: 11400000, guid: cfe18b418b57849448428056b4f282e4, type: 2}
+  - {fileID: 11400000, guid: d01b32f5fd7059345b6bd0c782294d44, type: 2}
   idlePattern: {fileID: 11400000, guid: 00b5dfb89926c4e419f9ca87d51fb989, type: 2}
   teleportPattern: {fileID: 11400000, guid: 45e27170ef8571c42b8add55b246bc23, type: 2}
 --- !u!4 &1207036322
